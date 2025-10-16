@@ -1,0 +1,382 @@
+/*
+Theme Name: Atahualpa TCTD Edition
+Theme URI: https://truechiptilldeath.com/themes/atahualpa-tctd
+Description: Security-hardened, modernized fork of Atahualpa theme. Optimized for TCTD (True Chip Till Death) properties with enterprise-grade security, modern WordPress standards, 8K monitor support, and TCTD brand defaults. Features: SQL injection protection, XSS prevention, CSRF tokens, modern HTML5 semantics, block editor support, accessibility improvements, ultra-wide display support up to 7680px, and GDPR-ready privacy controls.
+Version: 4.0.0-tctd.1
+Requires at least: 6.4
+Tested up to: 6.7
+Requires PHP: 8.0
+Author: TCTD (forked from BytesForAll)
+Author URI: https://truechiptilldeath.com
+License: GNU General Public License v2.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: block-styles, left-sidebar, right-sidebar, fluid-layout, fixed-layout, one-column, two-columns, three-columns, four-columns, custom-colors, custom-header, theme-options, threaded-comments, sticky-post, translation-ready, accessibility-ready, security-hardened, ultra-wide
+Text Domain: atahualpa-tctd
+Domain Path: /languages
+
+Original Atahualpa theme by BytesForAll
+TCTD Edition: Security hardened and modernized for production use with 8K display support
+*/
+
+/* ------------------------------------------------------------------
+   Base Responsive Layout - 8K Monitor Support
+------------------------------------------------------------------ */
+
+:root {
+    --content-width: 1280px;
+    --wide-width: 7680px;
+    --container-padding: clamp(1rem, 3vw, 4rem);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fff;
+}
+
+/* Container system for ultra-wide displays */
+.site-container {
+    max-width: var(--wide-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+.content-wrapper {
+    max-width: var(--content-width);
+    margin: 0 auto;
+}
+
+/* Responsive breakpoints including 8K */
+@media (min-width: 320px) {
+    /* Mobile */
+}
+
+@media (min-width: 768px) {
+    /* Tablet */
+}
+
+@media (min-width: 1024px) {
+    /* Desktop */
+}
+
+@media (min-width: 1920px) {
+    /* Full HD */
+    :root {
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 3840px) {
+    /* 4K */
+    :root {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 7680px) {
+    /* 8K Ultra-Wide */
+    :root {
+        font-size: 24px;
+    }
+
+    .site-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(1280px, 1fr));
+        gap: 2rem;
+    }
+}
+
+/* ------------------------------------------------------------------
+   Base WordPress Required Styles
+------------------------------------------------------------------ */
+
+.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.alignleft {
+    float: left;
+    margin-right: 1.5em;
+}
+
+.alignright {
+    float: right;
+    margin-left: 1.5em;
+}
+
+.wp-caption {
+    max-width: 100%;
+}
+
+.wp-caption-text {
+    text-align: center;
+    font-size: 0.875em;
+    color: #666;
+    margin: 0.5em 0;
+}
+
+.gallery-caption {
+    font-size: 0.875em;
+    color: #666;
+}
+
+.sticky {
+    /* Sticky post styling */
+}
+
+.bypostauthor {
+    /* Post author styling */
+}
+
+/* ------------------------------------------------------------------
+   Accessibility - Screen Reader Text
+------------------------------------------------------------------ */
+
+.screen-reader-text,
+.skip-link {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    word-wrap: normal !important;
+}
+
+.screen-reader-text:focus,
+.skip-link:focus {
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    clip: auto !important;
+    color: #0066cc;
+    display: block;
+    font-size: 0.875rem;
+    font-weight: bold;
+    height: auto;
+    left: 5px;
+    line-height: normal;
+    padding: 15px 23px 14px;
+    text-decoration: none;
+    top: 5px;
+    width: auto;
+    z-index: 100000;
+}
+
+/* ------------------------------------------------------------------
+   Links
+------------------------------------------------------------------ */
+
+a {
+    color: #0066cc;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+    color: #ff6600;
+    text-decoration: underline;
+}
+
+a:focus {
+    outline: 2px solid #0066cc;
+    outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------------
+   Images - Responsive & High DPI
+------------------------------------------------------------------ */
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* High DPI/Retina optimization */
+    img {
+        image-rendering: -webkit-optimize-contrast;
+    }
+}
+
+/* ------------------------------------------------------------------
+   Typography
+------------------------------------------------------------------ */
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 1em 0 0.5em;
+    line-height: 1.2;
+    font-weight: 600;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+p {
+    margin: 0 0 1em;
+}
+
+code, pre {
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 0.9em;
+    background: #f5f5f5;
+    border-radius: 3px;
+}
+
+pre {
+    padding: 1em;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+code {
+    padding: 0.2em 0.4em;
+}
+
+/* ------------------------------------------------------------------
+   Lists
+------------------------------------------------------------------ */
+
+ul, ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+li {
+    margin: 0.5em 0;
+}
+
+/* ------------------------------------------------------------------
+   Tables
+------------------------------------------------------------------ */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+
+th, td {
+    padding: 0.75em;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    font-weight: 600;
+    background: #f5f5f5;
+}
+
+/* ------------------------------------------------------------------
+   Forms
+------------------------------------------------------------------ */
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.75em;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid #0066cc;
+    outline-offset: 2px;
+    border-color: #0066cc;
+}
+
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+    padding: 0.75em 1.5em;
+    background: #0066cc;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+button:hover,
+button:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+    background: #ff6600;
+}
+
+button:focus,
+input[type="submit"]:focus {
+    outline: 2px solid #0066cc;
+    outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------------
+   Print Styles
+------------------------------------------------------------------ */
+
+@media print {
+    *,
+    *::before,
+    *::after {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+    }
+
+    img {
+        page-break-inside: avoid;
+    }
+
+    h2, h3 {
+        page-break-after: avoid;
+    }
+}
