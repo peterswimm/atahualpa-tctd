@@ -5,7 +5,7 @@
  * Security-hardened, modernized fork of Atahualpa
  *
  * @package Atahualpa_TCTD
- * @version 4.0.2-tctd.1
+ * @version 4.0.3-tctd.1
  * @since 4.0.0
  */
 
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Theme version
-define( 'ATAHUALPA_TCTD_VERSION', '4.0.2-tctd.1' );
+define( 'ATAHUALPA_TCTD_VERSION', '4.0.3-tctd.1' );
 define( 'ATAHUALPA_TCTD_MIN_WP', '6.4' );
 define( 'ATAHUALPA_TCTD_MIN_PHP', '8.0' );
 
