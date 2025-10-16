@@ -5,7 +5,7 @@
  * Security-hardened, modernized fork of Atahualpa
  *
  * @package Atahualpa_TCTD
- * @version 4.0.3-tctd.1
+ * @version 4.0.4-tctd.1
  * @since 4.0.0
  */
 
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Theme version
-define( 'ATAHUALPA_TCTD_VERSION', '4.0.3-tctd.1' );
+define( 'ATAHUALPA_TCTD_VERSION', '4.0.4-tctd.1' );
 define( 'ATAHUALPA_TCTD_MIN_WP', '6.4' );
 define( 'ATAHUALPA_TCTD_MIN_PHP', '8.0' );
 
@@ -52,7 +52,7 @@ function atahualpa_tctd_get_defaults() {
 
         // Typography (Inter font for accessibility + tech aesthetic)
         'font_family'             => "'Inter', Tahoma, Arial, sans-serif",
-        'font_size_base'          => 13,   // Optimized for Inter at screen sizes
+        'font_size_base'          => 18,   // 2025 accessibility standard (WCAG optimal)
         'line_height'             => 1.6,
 
         // Security

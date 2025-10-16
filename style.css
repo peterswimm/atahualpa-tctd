@@ -2,7 +2,7 @@
 Theme Name: Atahualpa TCTD Edition
 Theme URI: https://truechiptilldeath.com/themes/atahualpa-tctd
 Description: Security-hardened, modernized fork of Atahualpa theme. Optimized for TCTD (True Chip Till Death) properties with enterprise-grade security, modern WordPress standards, 8K monitor support, and TCTD brand defaults. Features: SQL injection protection, XSS prevention, CSRF tokens, modern HTML5 semantics, block editor support, accessibility improvements, ultra-wide display support up to 7680px, dynamic styling system, and GDPR-ready privacy controls.
-Version: 4.0.3-tctd.1
+Version: 4.0.4-tctd.1
 Requires at least: 6.4
 Tested up to: 6.7
 Requires PHP: 8.0
@@ -58,7 +58,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', Tahoma, Arial, sans-serif;
-    font-size: 13px;
+    font-size: 18px;
     line-height: 1.6;
     color: var(--tctd-yellow);
     background: var(--tctd-dark-bg);
@@ -666,7 +666,7 @@ input[type="submit"]:focus {
         flex-direction: column;
     }
 
-    .primary-menu.active {
+    .primary-menu.toggled {
         display: flex;
     }
 
@@ -681,8 +681,18 @@ input[type="submit"]:focus {
 
 .post {
     margin: 0 0 30px 0;
-    border: solid 1px var(--tctd-gray);
+    border: none;
     padding: 5px;
+}
+
+/* Hide duplicate "updated" date */
+.entry-meta .updated {
+    display: none;
+}
+
+/* Reduce whitespace above article titles */
+.entry-header {
+    margin-top: 0;
 }
 
 .post-kicker {
