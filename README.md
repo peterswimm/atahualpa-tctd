@@ -229,4 +229,3 @@ TCTD Edition © True Chip Till Death
 ---
 
 **Built with security, accessibility, and modern web standards in mind.**
-*True Chip Till Death - Hardware, Software, and the Chips Between*

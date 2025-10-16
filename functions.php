@@ -31,7 +31,7 @@ function atahualpa_tctd_get_defaults() {
     return array(
         // Branding
         'site_title'              => 'True Chip Till Death',
-        'tagline'                 => 'Hardware, Software, and the Chips Between',
+        'tagline'                 => '',
 
         // Colors (TCTD Brand - from actual truechiptilldeath.com)
         'primary_color'           => 'FFFF00', // Yellow

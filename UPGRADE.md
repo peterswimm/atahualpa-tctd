@@ -324,5 +324,3 @@ add_action('wp_enqueue_scripts', 'mytheme_enqueue_parent_dynamic_styles', 20);
 ---
 
 **Always backup before upgrading!**
-
-*True Chip Till Death - Hardware, Software, and the Chips Between*

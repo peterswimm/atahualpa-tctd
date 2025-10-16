@@ -315,5 +315,3 @@ While this theme is fully functional standalone, consider these plugins:
 - Visit TCTD website for updates
 
 **Enjoy your secure, modern, 8K-ready WordPress theme!**
-
-*True Chip Till Death - Hardware, Software, and the Chips Between*
