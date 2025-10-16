@@ -57,11 +57,18 @@ html {
 body {
     margin: 0;
     padding: 0;
-    font-family: Tahoma, Arial, sans-serif;
+    font-family: 'Inter', Tahoma, Arial, sans-serif;
     font-size: 13px;
     line-height: 1.6;
     color: var(--tctd-yellow);
     background: var(--tctd-dark-bg);
+}
+
+/* Use Inter variable font if supported */
+@supports (font-variation-settings: normal) {
+    body {
+        font-family: 'Inter var', Tahoma, Arial, sans-serif;
+    }
 }
 
 /* Container system for ultra-wide displays */

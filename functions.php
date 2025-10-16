@@ -50,9 +50,9 @@ function atahualpa_tctd_get_defaults() {
         'sidebar_width'           => 215,  // Original sidebar
         'layout_type'             => 'fluid', // fluid or fixed
 
-        // Typography (from actual TCTD site)
-        'font_family'             => 'Tahoma, Arial, sans-serif',
-        'font_size_base'          => 13,   // 0.8em * 16 ≈ 13px
+        // Typography (Inter font for accessibility + tech aesthetic)
+        'font_family'             => "'Inter', Tahoma, Arial, sans-serif",
+        'font_size_base'          => 13,   // Optimized for Inter at screen sizes
         'line_height'             => 1.6,
 
         // Security
@@ -222,11 +222,19 @@ add_action( 'widgets_init', 'atahualpa_tctd_widgets_init' );
 function atahualpa_tctd_scripts() {
     $options = get_option( 'atahualpa_tctd_options', atahualpa_tctd_get_defaults() );
 
+    // Inter font from official rsms/inter CDN
+    wp_enqueue_style(
+        'inter-font',
+        'https://rsms.me/inter/inter.css',
+        array(),
+        null
+    );
+
     // Main stylesheet
     wp_enqueue_style(
         'atahualpa-tctd-style',
         get_stylesheet_uri(),
-        array(),
+        array( 'inter-font' ),
         ATAHUALPA_TCTD_VERSION
     );
 
