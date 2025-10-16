@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Theme version
-define( 'ATAHUALPA_TCTD_VERSION', '4.0.0-tctd.1' );
+define( 'ATAHUALPA_TCTD_VERSION', '4.0.1-tctd.1' );
 define( 'ATAHUALPA_TCTD_MIN_WP', '6.4' );
 define( 'ATAHUALPA_TCTD_MIN_PHP', '8.0' );
 
@@ -61,6 +61,12 @@ function atahualpa_tctd_get_defaults() {
         'disable_file_edit'       => true,
         'security_headers'        => true,
 
+        // Background & Styling (from actual TCTD site)
+        'background_image'        => '',  // Path to background image
+        'background_repeat'       => 'no-repeat',
+        'background_position'     => 'top center',
+        'background_attachment'   => 'scroll',
+
         // Performance
         'enable_lazy_load'        => true,
         'enable_webp'             => true,
@@ -69,17 +75,42 @@ function atahualpa_tctd_get_defaults() {
 
         // Footer (from actual TCTD site)
         'footer_text'             => 'Copyright © ' . date('Y') . ' True Chip Till Death - All Rights Reserved',
+        'footer_background'       => '1b1b1b',
+        'footer_text_color'       => '999999',
+        'footer_link_color'       => '777777',
+        'footer_link_hover_color' => '333333',
         'show_wordpress_credit'   => false,
-        'footer_links'            => array(
-            array(
-                'text' => 'Privacy Policy',
-                'url'  => '/privacy-policy',
-            ),
-            array(
-                'text' => 'Terms of Service',
-                'url'  => '/terms',
-            ),
-        ),
+
+        // Widget Styling (from actual TCTD site)
+        'widget_title_color'      => 'FFFF00',
+        'widget_title_size'       => '12px',
+        'widget_title_transform'  => 'uppercase',
+        'widget_link_color'       => '999999',
+        'widget_link_hover_color' => 'FFFFFF',
+        'widget_link_weight'      => 'normal',
+        'widget_border_color'     => 'FFFF00',
+
+        // Sidebar Styling (from actual TCTD site)
+        'sidebar_background'      => '000000',
+        'sidebar_padding'         => '10px',
+
+        // Post/Content Styling (from actual TCTD site)
+        'content_background'      => '000000',
+        'content_text_color'      => 'FFFFFF',
+        'content_padding'         => '15px',
+        'post_title_color'        => 'FFFF00',
+        'post_title_hover_color'  => 'FFFFFF',
+        'post_meta_color'         => 'CCCCCC',
+        'post_border_color'       => '999999',
+
+        // Menu/Navigation (from actual TCTD site)
+        'menu_background'         => '333333',
+        'menu_background_hover'   => '666666',
+        'menu_link_color'         => 'FFFF00',
+        'menu_link_hover_color'   => 'FDFDFD',
+        'menu_border_color'       => 'FFFF66',
+        'menu_text_transform'     => 'uppercase',
+        'menu_font_size'          => '11px',
 
         // Accessibility
         'enable_skip_links'       => true,
@@ -186,6 +217,14 @@ function atahualpa_tctd_scripts() {
         ATAHUALPA_TCTD_VERSION
     );
 
+    // Dynamic styles based on theme options
+    wp_enqueue_style(
+        'atahualpa-tctd-dynamic',
+        add_query_arg( 'atahualpa_tctd_dynamic_css', '1', home_url( '/' ) ),
+        array( 'atahualpa-tctd-style' ),
+        ATAHUALPA_TCTD_VERSION . '-' . get_option( 'atahualpa_tctd_options_hash', time() )
+    );
+
     // Block editor styles
     if ( $options['enable_block_styles'] ) {
         wp_enqueue_style(
@@ -211,6 +250,17 @@ function atahualpa_tctd_scripts() {
     );
 }
 add_action( 'wp_enqueue_scripts', 'atahualpa_tctd_scripts' );
+
+/**
+ * Serve dynamic CSS
+ */
+function atahualpa_tctd_serve_dynamic_css() {
+    if ( isset( $_GET['atahualpa_tctd_dynamic_css'] ) ) {
+        require_once ATAHUALPA_TCTD_DIR . '/assets/css/dynamic-styles.php';
+        exit;
+    }
+}
+add_action( 'template_redirect', 'atahualpa_tctd_serve_dynamic_css' );
 
 /**
  * Security: Add security headers
