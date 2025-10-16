@@ -5,7 +5,7 @@
  * Security-hardened, modernized fork of Atahualpa
  *
  * @package Atahualpa_TCTD
- * @version 4.0.0-tctd.1
+ * @version 4.0.2-tctd.1
  * @since 4.0.0
  */
 
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Theme version
-define( 'ATAHUALPA_TCTD_VERSION', '4.0.1-tctd.1' );
+define( 'ATAHUALPA_TCTD_VERSION', '4.0.2-tctd.1' );
 define( 'ATAHUALPA_TCTD_MIN_WP', '6.4' );
 define( 'ATAHUALPA_TCTD_MIN_PHP', '8.0' );
 
@@ -159,8 +159,8 @@ function atahualpa_tctd_setup() {
         'flex-width'  => true,
     ) );
 
-    // Set content width
-    $GLOBALS['content_width'] = 1280;
+    // Set content width (from TCTD settings)
+    $GLOBALS['content_width'] = 900;
 
     // Register navigation menus
     register_nav_menus( array(
@@ -181,16 +181,29 @@ add_action( 'after_setup_theme', 'atahualpa_tctd_setup' );
  * Register widget areas
  */
 function atahualpa_tctd_widgets_init() {
+    // Left Sidebar (for News, Recent Posts, etc.)
     register_sidebar( array(
-        'name'          => esc_html__( 'Primary Sidebar', 'atahualpa-tctd' ),
-        'id'            => 'sidebar-primary',
-        'description'   => esc_html__( 'Main sidebar widget area', 'atahualpa-tctd' ),
+        'name'          => esc_html__( 'Left Sidebar', 'atahualpa-tctd' ),
+        'id'            => 'sidebar-left',
+        'description'   => esc_html__( 'Left sidebar widget area (215px wide)', 'atahualpa-tctd' ),
         'before_widget' => '<section id="%1$s" class="widget %2$s">',
         'after_widget'  => '</section>',
         'before_title'  => '<h3 class="widget-title">',
         'after_title'   => '</h3>',
     ) );
 
+    // Right Sidebar (for Follow Us, Social Media, etc.)
+    register_sidebar( array(
+        'name'          => esc_html__( 'Right Sidebar', 'atahualpa-tctd' ),
+        'id'            => 'sidebar-right',
+        'description'   => esc_html__( 'Right sidebar widget area (215px wide)', 'atahualpa-tctd' ),
+        'before_widget' => '<section id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</section>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+
+    // Footer Widgets
     register_sidebar( array(
         'name'          => esc_html__( 'Footer Widgets', 'atahualpa-tctd' ),
         'id'            => 'sidebar-footer',
@@ -402,10 +415,17 @@ function atahualpa_tctd_body_classes( $classes ) {
         $classes[] = 'layout-fixed';
     }
 
-    if ( is_active_sidebar( 'sidebar-primary' ) ) {
-        $classes[] = 'has-sidebar';
+    // Three-column layout classes
+    $has_left = is_active_sidebar( 'sidebar-left' );
+    $has_right = is_active_sidebar( 'sidebar-right' );
+
+    if ( $has_left && $has_right ) {
+        $classes[] = 'layout-three-column';
+    } elseif ( $has_left || $has_right ) {
+        $classes[] = 'layout-two-column';
+        $classes[] = $has_left ? 'has-left-sidebar' : 'has-right-sidebar';
     } else {
-        $classes[] = 'no-sidebar';
+        $classes[] = 'layout-one-column';
     }
 
     if ( $options['high_contrast_mode'] ) {

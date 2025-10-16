@@ -2,7 +2,7 @@
 Theme Name: Atahualpa TCTD Edition
 Theme URI: https://truechiptilldeath.com/themes/atahualpa-tctd
 Description: Security-hardened, modernized fork of Atahualpa theme. Optimized for TCTD (True Chip Till Death) properties with enterprise-grade security, modern WordPress standards, 8K monitor support, and TCTD brand defaults. Features: SQL injection protection, XSS prevention, CSRF tokens, modern HTML5 semantics, block editor support, accessibility improvements, ultra-wide display support up to 7680px, dynamic styling system, and GDPR-ready privacy controls.
-Version: 4.0.1-tctd.1
+Version: 4.0.2-tctd.1
 Requires at least: 6.4
 Tested up to: 6.7
 Requires PHP: 8.0
@@ -23,19 +23,25 @@ TCTD Edition: Security hardened and modernized for production use with 8K displa
 ------------------------------------------------------------------ */
 
 :root {
+    /* Layout Dimensions (from TCTD settings) */
     --content-width: 900px;
     --content-min-width: 770px;
     --content-max-width: 1250px;
+    --sidebar-width: 215px;
     --wide-width: 7680px;
-    --container-padding: clamp(1rem, 3vw, 4rem);
+    --container-padding: 0;
 
-    /* TCTD Brand Colors */
+    /* TCTD Brand Colors (from actual truechiptilldeath.com) */
     --tctd-yellow: #FFFF00;
     --tctd-red: #CC0000;
     --tctd-dark-bg: #1b1b1b;
     --tctd-gray: #999999;
     --tctd-white: #FFFFFF;
     --tctd-black: #000000;
+    --tctd-light-gray: #CCCCCC;
+    --tctd-menu-bg: #333333;
+    --tctd-menu-hover: #666666;
+    --tctd-border: #FFFF66;
 }
 
 * {
@@ -268,6 +274,164 @@ code {
 }
 
 /* ------------------------------------------------------------------
+   Three-Column Layout System (CSS Grid)
+------------------------------------------------------------------ */
+
+.layout-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    width: 100%;
+    max-width: var(--content-max-width);
+    min-width: var(--content-min-width);
+    margin: 0 auto;
+}
+
+/* Desktop: Three-column layout */
+@media (min-width: 1024px) {
+    .layout-three-column .layout-wrapper {
+        grid-template-columns: var(--sidebar-width) 1fr var(--sidebar-width);
+        grid-template-areas: "sidebar-left content sidebar-right";
+    }
+
+    .layout-three-column #sidebar-left {
+        grid-area: sidebar-left;
+    }
+
+    .layout-three-column .content-area {
+        grid-area: content;
+    }
+
+    .layout-three-column #sidebar-right {
+        grid-area: sidebar-right;
+    }
+
+    /* Two-column with left sidebar */
+    .layout-two-column.has-left-sidebar .layout-wrapper {
+        grid-template-columns: var(--sidebar-width) 1fr;
+        grid-template-areas: "sidebar-left content";
+    }
+
+    .layout-two-column.has-left-sidebar #sidebar-left {
+        grid-area: sidebar-left;
+    }
+
+    .layout-two-column.has-left-sidebar .content-area {
+        grid-area: content;
+    }
+
+    /* Two-column with right sidebar */
+    .layout-two-column.has-right-sidebar .layout-wrapper {
+        grid-template-columns: 1fr var(--sidebar-width);
+        grid-template-areas: "content sidebar-right";
+    }
+
+    .layout-two-column.has-right-sidebar .content-area {
+        grid-area: content;
+    }
+
+    .layout-two-column.has-right-sidebar #sidebar-right {
+        grid-area: sidebar-right;
+    }
+}
+
+/* Tablet: Stack to single column or optional two-column */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .layout-wrapper {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    #sidebar-left,
+    #sidebar-right {
+        width: 100%;
+    }
+}
+
+/* Mobile: Single column stack */
+@media (max-width: 767px) {
+    .layout-wrapper {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .site-container {
+        padding: 0 1rem;
+    }
+
+    #sidebar-left,
+    #sidebar-right {
+        width: 100%;
+    }
+}
+
+/* Sidebar Styling (from TCTD settings) */
+.sidebar {
+    padding: 10px;
+    background: var(--tctd-black);
+}
+
+#sidebar-left {
+    padding: 10px;
+    background: var(--tctd-black);
+}
+
+#sidebar-right {
+    padding: 10px;
+    background: var(--tctd-black);
+}
+
+/* Content Area Styling (from TCTD settings) */
+.content-area {
+    padding: 15px;
+    background: var(--tctd-black);
+    color: var(--tctd-white);
+}
+
+/* Widget Styling (from TCTD settings) */
+.widget {
+    margin: 0 0 15px 0;
+}
+
+.widget-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--tctd-yellow);
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+}
+
+.widget ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.widget ul li {
+    margin: 0;
+    padding: 1px 5px 1px 12px;
+    border-left: 2px solid var(--tctd-menu-bg);
+    transition: border-color 0.2s ease;
+}
+
+.widget ul li:hover {
+    border-left-color: var(--tctd-yellow);
+}
+
+.widget a {
+    color: var(--tctd-gray);
+    font-weight: normal;
+    text-decoration: none;
+    display: block;
+    padding-left: 10px;
+}
+
+.widget a:hover {
+    color: var(--tctd-white);
+    text-decoration: none;
+}
+
+/* ------------------------------------------------------------------
    Lists
 ------------------------------------------------------------------ */
 
@@ -393,4 +557,245 @@ input[type="submit"]:focus {
     h2, h3 {
         page-break-after: avoid;
     }
+}
+
+/* ------------------------------------------------------------------
+   Header & Navigation Menu (from TCTD settings)
+------------------------------------------------------------------ */
+
+.site-header {
+    background: var(--tctd-dark-bg);
+}
+
+.site-branding {
+    padding: 15px 0;
+}
+
+.site-title {
+    margin: 0;
+    padding: 0;
+    font-size: 240%;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.site-title a {
+    color: var(--tctd-yellow);
+    text-decoration: none;
+}
+
+.site-title a:hover {
+    color: #DADADA;
+}
+
+.site-description {
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #666666;
+}
+
+/* Primary Navigation Menu - Horizontal */
+.main-navigation {
+    background: var(--tctd-menu-bg);
+    border-top: solid 1px var(--tctd-border);
+    border-bottom: solid 1px var(--tctd-border);
+}
+
+.primary-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.primary-menu li {
+    margin: 0;
+    position: relative;
+}
+
+.primary-menu a {
+    display: block;
+    padding: 6px 10px;
+    color: var(--tctd-yellow);
+    font-size: 11px;
+    font-family: Arial, Verdana, sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: normal;
+    border: solid 1px var(--tctd-border);
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.primary-menu a:hover,
+.primary-menu a:focus {
+    background: var(--tctd-menu-hover);
+    color: #FDFDFD;
+    text-decoration: none;
+}
+
+/* Mobile menu toggle */
+.menu-toggle {
+    display: none;
+    background: var(--tctd-menu-bg);
+    color: var(--tctd-yellow);
+    border: 1px solid var(--tctd-border);
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+@media (max-width: 767px) {
+    .menu-toggle {
+        display: block;
+        width: 100%;
+    }
+
+    .primary-menu {
+        display: none;
+        flex-direction: column;
+    }
+
+    .primary-menu.active {
+        display: flex;
+    }
+
+    .primary-menu li {
+        width: 100%;
+    }
+}
+
+/* ------------------------------------------------------------------
+   Post Styling (from TCTD settings)
+------------------------------------------------------------------ */
+
+.post {
+    margin: 0 0 30px 0;
+    border: solid 1px var(--tctd-gray);
+    padding: 5px;
+}
+
+.post-kicker {
+    margin: 0 0 5px 0;
+}
+
+.post-kicker a {
+    color: var(--tctd-light-gray);
+    text-decoration: none;
+    text-transform: lowercase;
+}
+
+.post-kicker a:hover {
+    color: var(--tctd-red);
+}
+
+.post-headline {
+    padding: 0;
+    margin: 0;
+}
+
+.post-headline h2,
+.post-headline h1 {
+    padding: 0;
+    margin: 0;
+    color: var(--tctd-yellow);
+}
+
+.post-headline a {
+    color: var(--tctd-yellow);
+    text-decoration: none;
+}
+
+.post-headline a:hover {
+    color: var(--tctd-white);
+    text-decoration: none;
+}
+
+.post-byline {
+    margin: 5px 0 10px 0;
+    font-size: 0.9em;
+    color: var(--tctd-gray);
+}
+
+.post-bodycopy {
+    margin: 15px 0;
+    line-height: 1.6;
+}
+
+.post-footer {
+    margin: 0;
+    padding: 5px;
+    background: var(--tctd-black);
+    color: #333;
+    line-height: 18px;
+    font-size: 0.9em;
+}
+
+.post-footer a {
+    color: #666;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.post-footer a:hover {
+    color: #666;
+    text-decoration: underline;
+}
+
+/* Sticky Post */
+.sticky {
+    background: var(--tctd-black);
+    padding: 10px;
+}
+
+/* Comments */
+.comment {
+    background: var(--tctd-black);
+    border: dotted 1px var(--tctd-yellow);
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.comment-alt {
+    background: var(--tctd-menu-bg);
+}
+
+.comment-author {
+    font-size: 135%;
+    font-weight: bold;
+    color: var(--tctd-yellow);
+}
+
+.comment-form {
+    margin: 25px 0;
+    padding: 25px;
+    background: var(--tctd-menu-bg);
+    border-radius: 8px;
+}
+
+/* ------------------------------------------------------------------
+   Footer (from TCTD settings)
+------------------------------------------------------------------ */
+
+.site-footer {
+    background-color: var(--tctd-dark-bg);
+    padding: 10px;
+    text-align: center;
+    color: var(--tctd-gray);
+    font-size: 95%;
+    margin-top: 20px;
+}
+
+.site-footer a {
+    text-decoration: none;
+    color: #777777;
+    font-weight: normal;
+}
+
+.site-footer a:hover {
+    text-decoration: none;
+    color: #333333;
 }
