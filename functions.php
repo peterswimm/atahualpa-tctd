@@ -33,24 +33,26 @@ function atahualpa_tctd_get_defaults() {
         'site_title'              => 'True Chip Till Death',
         'tagline'                 => 'Hardware, Software, and the Chips Between',
 
-        // Colors (TCTD Brand)
-        'primary_color'           => '0066cc',
-        'secondary_color'         => '333333',
-        'accent_color'            => 'ff6600',
-        'background_color'        => 'ffffff',
-        'text_color'              => '333333',
-        'link_color'              => '0066cc',
-        'link_hover_color'        => 'ff6600',
+        // Colors (TCTD Brand - from actual truechiptilldeath.com)
+        'primary_color'           => 'FFFF00', // Yellow
+        'secondary_color'         => '999999', // Gray
+        'accent_color'            => 'CC0000', // Red
+        'background_color'        => '1b1b1b', // Almost black
+        'text_color'              => 'FFFFFF', // White
+        'link_color'              => 'FFFF00', // Yellow
+        'link_hover_color'        => 'CC0000', // Red
 
-        // Layout
-        'content_width'           => 1280,
-        'wide_width'              => 7680,
-        'sidebar_width'           => 320,
+        // Layout (based on actual TCTD site)
+        'content_width'           => 900,  // Original TCTD width
+        'content_min_width'       => 770,  // Original min
+        'content_max_width'       => 1250, // Original max
+        'wide_width'              => 7680, // 8K support
+        'sidebar_width'           => 215,  // Original sidebar
         'layout_type'             => 'fluid', // fluid or fixed
 
-        // Typography
-        'font_family'             => '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
-        'font_size_base'          => 16,
+        // Typography (from actual TCTD site)
+        'font_family'             => 'Tahoma, Arial, sans-serif',
+        'font_size_base'          => 13,   // 0.8em * 16 ≈ 13px
         'line_height'             => 1.6,
 
         // Security
@@ -65,8 +67,8 @@ function atahualpa_tctd_get_defaults() {
         'minify_css'              => true,
         'minify_js'               => true,
 
-        // Footer
-        'footer_text'             => '© ' . date('Y') . ' TCTD - True Chip Till Death. All rights reserved.',
+        // Footer (from actual TCTD site)
+        'footer_text'             => 'Copyright © ' . date('Y') . ' True Chip Till Death - All Rights Reserved',
         'show_wordpress_credit'   => false,
         'footer_links'            => array(
             array(
